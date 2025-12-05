@@ -34,13 +34,16 @@ jobs:
           npm run build --if-present
           npm run test --if-present
 
+      - name: Zip frontend for deployment
+        run: |
+          cd frontend
+          zip -r ../frontend.zip . -x "node_modules/*"
+      
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
           name: node-app
-          path: |
-            ./frontend
-            !frontend/node_modules/
+          path: frontend.zip
 
   deploy:
     runs-on: ubuntu-latest
@@ -51,7 +54,11 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: node-app
-          path: ./deploy
+      
+      - name: Unzip frontend
+        run: |
+          mkdir -p ./deploy
+          unzip frontend.zip -d ./deploy
       
       - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp
