@@ -51,6 +51,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: node-app
+          path: ./deploy
       
       - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp
@@ -58,5 +59,5 @@ jobs:
         with:
           app-name: 'tech0-gen-11-step3-2-node-43'
           slot-name: 'Production'
-          package: ./frontend
+          package: ./deploy
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_F3F4DC53D3EC47FA847CFACCE83C66A7 }}
