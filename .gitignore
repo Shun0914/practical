@@ -7,7 +7,7 @@ __pycache__/
 
 # Node
 node_modules/
-.next/
+# .next/ - コメントアウト: デプロイ時にアーティファクトに含めるため
 .env.local
 
 # その他
