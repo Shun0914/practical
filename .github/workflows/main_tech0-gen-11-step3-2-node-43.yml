@@ -40,7 +40,7 @@ jobs:
           name: node-app
           path: |
             ./frontend
-            !frontend/node_modules/
+            !frontend/.next/
 
   deploy:
     runs-on: ubuntu-latest
